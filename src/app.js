@@ -1,14 +1,10 @@
-import "dotenv/config";
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import setReviewRoutes from "./routes/reviewsRoutes.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const setReviewRoutes = require("./routes/reviewsRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Use the port from the environment or default to 3000
 
 // Middleware
 app.use(express.json());
@@ -20,11 +16,10 @@ app.use(express.static(path.join(__dirname, "public")));
 setReviewRoutes(app);
 
 // Start Server
-if (require.main === module) {
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running at http://0.0.0.0:${PORT}`);
-  });
-}
+app.listen(PORT, "0.0.0.0", () => {  // Listen on 0.0.0.0 for external access (Render)
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
+});
 
-export default app;
+module.exports = app;
+
 

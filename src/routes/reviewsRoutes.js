@@ -1,10 +1,12 @@
-import express from "express";
-import { getReviews } from "../controllers/reviewsController.js";
+// In reviewsRoutes.js
+const express = require("express");
+const { getReviews } = require("../controllers/reviewsController.js");
 
 const router = express.Router();
 
-router.get("/api/reviews", getReviews);
+// GET /reviews
+router.get("/reviews", getReviews);
 
-export default (app) => {
-  app.use(router);
+module.exports = (app, basePath) => {
+  app.use(basePath, router);
 };
