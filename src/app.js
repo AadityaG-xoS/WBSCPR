@@ -14,6 +14,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Setup Routes
 setReviewRoutes(app);
+app.get("/", (req, res) => {
+  res.send("Welcome to the reviews app!");
+});
 
 // Start Server (use process.env.PORT for Render)
 if (require.main === module) {
