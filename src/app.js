@@ -4,7 +4,7 @@ const path = require("path");
 const setReviewRoutes = require("./routes/reviewsRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Use the port from the environment or default to 3000
 
 // Middleware
 app.use(express.json());
@@ -16,10 +16,8 @@ app.use(express.static(path.join(__dirname, "public")));
 setReviewRoutes(app);
 
 // Start Server
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-  });
-}
+app.listen(PORT, "0.0.0.0", () => {  // Listen on 0.0.0.0 for external access (Render)
+  console.log(`Server running at http://localhost:${PORT}`);
+});
 
 module.exports = app;
