@@ -1,10 +1,5 @@
 import { extractReviews } from "../services/reviewsService.js";
 
-/**
- * Controller to handle review extraction requests.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
 const getReviews = async (req, res) => {
   const { url } = req.query;
 

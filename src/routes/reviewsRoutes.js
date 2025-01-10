@@ -1,11 +1,10 @@
-const express = require("express");
-const { getReviews } = require("../controllers/reviewsController.js");
+import express from "express";
+import { getReviews } from "../controllers/reviewsController.js";
 
 const router = express.Router();
 
-// GET /api/reviews
 router.get("/api/reviews", getReviews);
 
-module.exports = (app) => {
+export default (app) => {
   app.use(router);
 };
