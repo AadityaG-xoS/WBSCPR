@@ -27,10 +27,6 @@ The app leverages **ScrapeGraph.ai** for scraping data, **Node.js** for backend 
    - Built-in API to fetch reviews, making it easy to integrate with other applications or tools.
    - Data can be used in analysis, reporting, or visualizations.
 
-### 5. **Extensible and Scalable**
-   - Easily extendable architecture to add more scraping sources, endpoints, or functionalities.
-   - Can be scaled as needed without major refactors.
-
 ---
 
 ## Technologies Used
@@ -69,8 +65,8 @@ Follow these steps to set up and run the project locally or deploy it on Render.
 
  **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/reviews-scraper.git
-   cd reviews-scraper
+   git clone https://github.com/AadityaG-xoS/WBSCPR.git
+   cd WBSCPR
    ```
 **WBSCPR is also hosted at https://wbscrxper.onrender.com/ using Render**
 
