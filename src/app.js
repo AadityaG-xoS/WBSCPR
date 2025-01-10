@@ -4,7 +4,7 @@ const path = require("path");
 const setReviewRoutes = require("./routes/reviewsRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 3000;  // Ensure the PORT is being used from environment variable
+const PORT = process.env.PORT || 10000;  // Ensure the PORT is being used from environment variable
 
 // Middleware
 app.use(express.json());
