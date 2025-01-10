@@ -1,9 +1,8 @@
-# WBSCPR
-# Reviews Scraper 
+# WBSCPR : Reviews Scraper 
 
 ## Overview
 
-Welcome to the **WBSCPR:Reviews Scraper**! This project utilizes **ScrapeGraph.ai**, **Node.js**, and **Render** to build a robust review scraping application that fetches product reviews from various e-commerce websites and displays them on a user-friendly interface. The application is designed to help businesses, researchers, or developers access aggregated reviews for analysis, insights, or feedback purposes.
+Welcome to the **WBSCPR:Reviews Scraper**! This project utilizes **ScrapeGraph.ai**, **Node.js**, and **Render** to build a robust review scraping website that fetches product reviews from various e-commerce websites and displays them on a user-friendly interface. The project is designed to help businesses, researchers, or developers access aggregated reviews for analysis, insights, or feedback purposes.
 
 The app leverages **ScrapeGraph.ai** for scraping data, **Node.js** for backend development, and **Render** for cloud deployment, offering a seamless experience with scalability, reliability, and ease of access.
 
@@ -48,7 +47,7 @@ The app leverages **ScrapeGraph.ai** for scraping data, **Node.js** for backend 
 
 The system follows a simple yet effective architecture:
 
-- **Frontend (Client)**: The user interacts with the frontend, which could be a simple web page or API.
+- **Frontend (Client)**: The user interacts with the frontend, a simple web page.
 - **Backend (Node.js)**: The Node.js server listens for API requests, initiates scraping via ScrapeGraph.ai, and processes the data before sending it to the frontend or external applications.
 - **ScrapeGraph.ai**: This service fetches data (reviews) from e-commerce websites and returns it to the backend.
 - **Render**: Hosts the backend application and ensures it is live and accessible to users.
@@ -72,7 +71,28 @@ Follow these steps to set up and run the project locally or deploy it on Render.
    ```bash
    git clone https://github.com/your-username/reviews-scraper.git
    cd reviews-scraper
+   ```
+**WBSCPR is also hosted at https://wbscrxper.onrender.com/ using Render**
 
-  **WBSCPR is also hosted at https://wbscrxper.onrender.com/ using Render**
+### Output Images
+
+Here are some sample outputs from the Review Scraper API:
+
+JSON Reviews Response:
+![1](assets/system-architecture.png)
+
+Example response with a list of reviews:
+
+
+Deployment using Render:
+![1](assets/system-architecture.png)
+
+A visualization of the scraped reviews, showing user ratings and feedback:
+![1](assets/system-architecture.png)
+
+###  Conclusion
+
+This project demonstrates the power of web scraping using ScrapeGraph and Node.js, providing a simple yet effective API for scraping reviews from various websites. Deployed on Render, the app allows seamless and scalable scraping of product reviews.
+  
 
  
