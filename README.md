@@ -52,7 +52,7 @@ The system follows a simple yet effective architecture:
 - **ScrapeGraph.ai**: This service fetches data (reviews) from e-commerce websites and returns it to the backend.
 - **Render**: Hosts the backend application and ensures it is live and accessible to users.
 
-![System Architecture](assets/system-architecture.png)
+![System Architecture](assets/workflow.png)
 
 ---
 
@@ -79,16 +79,18 @@ Follow these steps to set up and run the project locally or deploy it on Render.
 Here are some sample outputs from the Review Scraper API:
 
 JSON Reviews Response:
-![1](assets/system-architecture.png)
+![1](assets/jsn1.png)
+![2](assets/jsn1.png)
 
 Example response with a list of reviews:
 
 
 Deployment using Render:
-![1](assets/system-architecture.png)
+![1](assets/rndr.png)
 
 A visualization of the scraped reviews, showing user ratings and feedback:
-![1](assets/system-architecture.png)
+![1](assets/ot1.png)
+![2](assets/ot2.png)
 
 ###  Conclusion
 
