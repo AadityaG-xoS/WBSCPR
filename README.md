@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the **WBSCPR:Reviews Scraper**! This project utilizes **ScrapeGraph.ai**, **Node.js**, and **Render** to build a robust review scraping website that fetches product reviews from various e-commerce websites and displays them on a user-friendly interface. The project is designed to help businesses, researchers, or developers access aggregated reviews for analysis, insights, or feedback purposes.
+Welcome to the **WBSCPR: Reviews Scraper**! This project utilizes **ScrapeGraph.ai**, **Node.js**, and **Render** to build a robust review scraping website that fetches product reviews from various e-commerce websites and displays them on a user-friendly interface. The project is designed to help businesses, researchers, or developers access aggregated reviews for analysis, insights, or feedback purposes.
 
 The app leverages **ScrapeGraph.ai** for scraping data, **Node.js** for backend development, and **Render** for cloud deployment, offering a seamless experience with scalability, reliability, and ease of access.
 
@@ -82,15 +82,15 @@ JSON Reviews Response:
 ![1](assets/jsn1.png)
 ![2](assets/jsn1.png)
 
-Example response with a list of reviews:
-
 
 Deployment using Render:
 ![1](assets/rndr.png)
 
+
 A visualization of the scraped reviews, showing user ratings and feedback:
 ![1](assets/ot1.png)
 ![2](assets/ot2.png)
+
 
 ###  Conclusion
 
