@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Reviews</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      h1 {
+        text-align: center;
+      }
+      .form-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .reviews-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .review {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+      }
+      .review-title {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      .review-body {
+        margin: 10px 0;
+      }
+      .review-footer {
+        font-size: 0.9em;
+        color: #555;
+      }
+      .error {
+        color: red;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .loading {
+        text-align: center;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Product Reviews</h1>
+
+    <div class="form-container">
+      <input
+        type="text"
+        id="url-input"
+        placeholder="Enter product URL..."
+        style="width: 60%; padding: 10px; margin-bottom: 10px"
+      />
+      <button onclick="fetchReviews()" style="padding: 10px 20px">
+        Fetch Reviews
+      </button>
+    </div>
+
+    <div id="error-message" class="error"></div>
+    <div id="loading-message" class="loading"></div>
+    <div class="reviews-container" id="reviews-container">
+      <!-- Reviews will be rendered here -->
+    </div>
+
+    <script>
+      async function fetchReviews() {
+        const urlInput = document.getElementById("url-input").value;
+        const errorMessage = document.getElementById("error-message");
+        const loadingMessage = document.getElementById("loading-message");
+        const reviewsContainer = document.getElementById("reviews-container");
+
+        errorMessage.innerHTML = ""; // Clear previous errors
+        loadingMessage.innerHTML = ""; // Clear previous loading message
+        reviewsContainer.innerHTML = ""; // Clear previous reviews
+
+        if (!urlInput) {
+          errorMessage.innerHTML = "Please enter a valid product URL.";
+          return;
+        }
+
+        try {
+          loadingMessage.innerHTML = "Fetching reviews, please wait...";
+
+          // Query the API endpoint
+          const apiUrl = `/api/reviews?url=${encodeURIComponent(urlInput)}`;
+          const response = await fetch(apiUrl);
+
+          if (!response.ok) {
+            throw new Error(
+              `Error: ${response.status} - ${response.statusText}`
+            );
+          }
+
+          const data = await response.json();
+
+          loadingMessage.innerHTML = ""; // Clear loading message
+
+          // Render reviews
+          if (data.reviews_count === 0) {
+            reviewsContainer.innerHTML = "<p>No reviews available.</p>";
+            return;
+          }
+
+          data.reviews.forEach((review) => {
+            const reviewElement = document.createElement("div");
+            reviewElement.classList.add("review");
+
+            reviewElement.innerHTML = `
+            <div class="review-title">${review.title || "No Title"}</div>
+            <div class="review-body">${review.body || "No Content"}</div>
+            <div class="review-footer">
+              <strong>Rating:</strong> ${review.rating || "NA"} | 
+              <strong>Reviewer:</strong> ${review.reviewer || "Anonymous"}
+            </div>
+          `;
+
+            reviewsContainer.appendChild(reviewElement);
+          });
+        } catch (error) {
+          console.error("Error fetching reviews:", error);
+          errorMessage.innerHTML =
+            "Error loading reviews. Please check the URL or try again later.";
+          loadingMessage.innerHTML = ""; // Clear loading message in case of error
+        }
+      }
+    </script>
+  </body>
+</html>
