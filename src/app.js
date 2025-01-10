@@ -10,13 +10,10 @@ const PORT = process.env.PORT || 10000;  // Ensure the PORT is being used from e
 app.use(express.json());
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Setup Routes
 setReviewRoutes(app);
-app.get("/", (req, res) => {
-  res.send("Welcome to the reviews app!");
-});
 
 // Start Server (use process.env.PORT for Render)
 if (require.main === module) {
