@@ -18,7 +18,7 @@ setReviewRoutes(app);
 // Start Server (use process.env.PORT for Render)
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);  // Use correct port
+    console.log(`Server running at http://0.0.0.0:${PORT}`);  // Use correct port
   });
 }
 
