@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../public")));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, "public")));
 
 // Setup Routes
 setReviewRoutes(app);

@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Product Reviews Page" />
+    <meta name="keywords" content="product, reviews, feedback, rating" />
+    <meta name="author" content="Your Name" />
     <title>Product Reviews</title>
     <style>
       body {
@@ -91,13 +94,16 @@
           loadingMessage.innerHTML = "Fetching reviews, please wait...";
 
           // Query the API endpoint
-          const apiUrl = `/api/reviews?url=${encodeURIComponent(urlInput)}`;
+          const apiUrl = `${window.location.origin}/api/reviews?url=${encodeURIComponent(urlInput)}`;
           const response = await fetch(apiUrl);
 
           if (!response.ok) {
-            throw new Error(
-              `Error: ${response.status} - ${response.statusText}`
-            );
+            if (response.status === 404) {
+              errorMessage.innerHTML = "Product not found. Please check the URL.";
+            } else {
+              throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            return;
           }
 
           const data = await response.json();
@@ -115,13 +121,13 @@
             reviewElement.classList.add("review");
 
             reviewElement.innerHTML = `
-            <div class="review-title">${review.title || "No Title"}</div>
-            <div class="review-body">${review.body || "No Content"}</div>
-            <div class="review-footer">
-              <strong>Rating:</strong> ${review.rating || "NA"} | 
-              <strong>Reviewer:</strong> ${review.reviewer || "Anonymous"}
-            </div>
-          `;
+              <div class="review-title">${review.title || "No Title"}</div>
+              <div class="review-body">${review.body || "No Content"}</div>
+              <div class="review-footer">
+                <strong>Rating:</strong> ${review.rating || "NA"} | 
+                <strong>Reviewer:</strong> ${review.reviewer || "Anonymous"}
+              </div>
+            `;
 
             reviewsContainer.appendChild(reviewElement);
           });
