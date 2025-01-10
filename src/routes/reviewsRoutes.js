@@ -5,8 +5,8 @@ const { getReviews } = require("../controllers/reviewsController.js");
 const router = express.Router();
 
 // GET /reviews
-router.get("/reviews", getReviews);
+router.get("/api/reviews", getReviews);
 
-module.exports = (app, basePath) => {
-  app.use(basePath, router);
+module.exports = (app) => {
+  app.use(router);
 };
