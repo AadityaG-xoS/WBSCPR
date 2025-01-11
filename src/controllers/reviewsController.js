@@ -1,12 +1,12 @@
 import { extractReviews } from "../services/reviewsService.js";
 
 /**
- * Controller to handle review extraction requests.
+ * Controller to handle review extraction requests with pagination support.
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
  */
 const getReviews = async (req, res) => {
-  const { url } = req.query;
+  const { url, page = 1, maxPages = 5 } = req.query;
 
   if (!url) {
     return res.status(400).json({
@@ -17,7 +17,20 @@ const getReviews = async (req, res) => {
   }
 
   try {
-    const reviewsData = await extractReviews(url);
+    // Convert query parameters to numbers for pagination
+    const currentPage = parseInt(page, 10);
+    const maxPagesToScrape = parseInt(maxPages, 10);
+
+    if (isNaN(currentPage) || isNaN(maxPagesToScrape)) {
+      return res.status(400).json({
+        reviews_count: 0,
+        reviews: [],
+        error: "Invalid page or maxPages parameter. Must be numeric.",
+      });
+    }
+
+    // Extract reviews with pagination
+    const reviewsData = await extractReviews(url, currentPage, maxPagesToScrape);
 
     if (reviewsData.error) {
       return res.status(500).json({
