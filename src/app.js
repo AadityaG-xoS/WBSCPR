@@ -14,6 +14,11 @@ app.use(express.json());
 // Serve static files from the public directory
 app.use(express.static(path.join(path.resolve(), "../public")));  // Use path.resolve() for better compatibility
 
+// Root Route: Serve the index.html from the public directory
+app.get("/", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "../public/index.html"));  // Ensure the correct path to index.html
+});
+
 // Setup Routes
 setReviewRoutes(app);
 
