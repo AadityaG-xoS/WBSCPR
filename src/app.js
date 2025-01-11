@@ -16,7 +16,7 @@ app.use(express.static(path.join(path.resolve(), "../public")));  // Use path.re
 
 // Root Route: Serve the index.html from the public directory
 app.get("/", (req, res) => {
-  res.sendFile(path.join(path.resolve(), "../public/index.html"));  // Ensure the correct path to index.html
+  res.sendFile(path.join(path.resolve(), "../public"));  // Ensure the correct path to index.html
 });
 
 // Setup Routes
