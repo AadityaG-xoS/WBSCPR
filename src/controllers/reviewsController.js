@@ -1,4 +1,5 @@
-import { extractReviews } from "../services/reviewsService.js";
+// reviewsController.js
+import { extractReviewsWithPuppeteer } from './reviewsService';
 
 /**
  * Controller to handle review extraction requests with pagination support.
@@ -29,8 +30,8 @@ const getReviews = async (req, res) => {
       });
     }
 
-    // Extract reviews with pagination
-    const reviewsData = await extractReviews(url, currentPage, maxPagesToScrape);
+    // Extract reviews with pagination using Puppeteer
+    const reviewsData = await extractReviewsWithPuppeteer(url, currentPage, maxPagesToScrape);
 
     if (reviewsData.error) {
       return res.status(500).json({

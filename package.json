@@ -1,9 +1,9 @@
 {
   "name": "xxx",
   "version": "1.0.0",
-  "main": "app.js",  
+  "main": "app.js",
   "scripts": {
-    "start": "node src/app.js", 
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +13,7 @@
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "puppeteer": "^24.0.0",
     "scrapegraph-js": "^0.0.2"
   }
 }
