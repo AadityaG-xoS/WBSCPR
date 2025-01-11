@@ -12,12 +12,7 @@ const PORT = process.env.PORT || 10000;  // Ensure the PORT is being used from e
 app.use(express.json());
 
 // Serve static files from the public directory
-app.use(express.static(path.join(path.resolve(), "../public")));  // Use path.resolve() for better compatibility
-
-// Root Route: Serve the index.html from the public directory
-app.get("/", (req, res) => {
-  res.sendFile(path.join(path.resolve(), "../public"));  // Ensure the correct path to index.html
-});
+app.use(express.static(path.resolve('public')));  // Adjusted path to public directory
 
 // Setup Routes
 setReviewRoutes(app);
