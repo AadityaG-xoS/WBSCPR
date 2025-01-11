@@ -1,5 +1,5 @@
 // reviewsController.js
-import { extractReviewsWithPuppeteer } from '../services/reviewsService';
+import { extractReviewsWithPuppeteer } from '../services/reviewsService.js';
 
 /**
  * Controller to handle review extraction requests with pagination support.
