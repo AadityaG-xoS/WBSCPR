@@ -1,75 +1,52 @@
-// reviewsService.js (or your specific service file)
 import puppeteer from 'puppeteer';
 
 /**
- * Function to scrape reviews using Puppeteer for the given URL.
- * @param {string} url - The URL of the product to scrape reviews from.
- * @param {number} page - The current page for pagination.
- * @param {number} maxPages - The maximum number of pages to scrape.
- * @returns {Object} - Reviews data including review count and reviews.
+ * Extract reviews using Puppeteer from a product URL with pagination support.
+ * @param {string} url - The product URL to scrape reviews from.
+ * @param {number} page - The page number to scrape.
+ * @param {number} maxPages - The number of pages to scrape.
+ * @returns {Object} - An object containing reviews and an optional error.
  */
-const extractReviewsWithPuppeteer = async (url, page, maxPages) => {
-  let allReviews = [];
-  let totalReviewsCount = 0;
+export const extractReviewsWithPuppeteer = async (url, page, maxPages) => {
+  let reviews = [];
+  let error = null;
 
   try {
-    const browser = await puppeteer.launch({ headless: true }); // Launch the browser
-    const pageInstance = await browser.newPage(); // Open a new page
+    const browser = await puppeteer.launch();
+    const pageInstance = await browser.newPage();
 
-    // Loop through pages if there are multiple pages
-    for (let currentPage = 1; currentPage <= maxPages; currentPage++) {
-      const currentPageUrl = `${url}?page=${currentPage}`;
-      console.log(`Fetching reviews from: ${currentPageUrl}`);
+    await pageInstance.goto(url, { waitUntil: 'networkidle2' });
 
-      await pageInstance.goto(currentPageUrl, { waitUntil: 'domcontentloaded' }); // Wait until the page content is loaded
-
-      // Get reviews (you may need to adjust the selector based on the site's structure)
-      const reviews = await pageInstance.evaluate(() => {
-        const reviewsArray = [];
-        const reviewElements = document.querySelectorAll('.review'); // Adjust this selector based on the website
-
-        reviewElements.forEach((reviewElement) => {
-          const title = reviewElement.querySelector('.review-title')?.innerText || null;
-          const body = reviewElement.querySelector('.review-body')?.innerText || null;
-          const rating = parseFloat(reviewElement.querySelector('.review-rating')?.innerText || 0);
-          const reviewer = reviewElement.querySelector('.reviewer-name')?.innerText || null;
-
-          reviewsArray.push({
-            title,
-            body,
-            rating,
-            reviewer,
-          });
-        });
-
-        return reviewsArray;
+    // Use page and maxPages to navigate to multiple pages if needed
+    for (let i = 1; i <= maxPages; i++) {
+      const reviewsOnPage = await pageInstance.evaluate(() => {
+        const reviewElements = document.querySelectorAll('.review');  // Update this selector based on actual page structure
+        return Array.from(reviewElements).map(review => ({
+          username: review.querySelector('.username').innerText,
+          rating: review.querySelector('.rating').innerText,
+          comment: review.querySelector('.comment').innerText,
+        }));
       });
 
-      // If reviews are found on the current page, add them to the list
-      if (reviews.length > 0) {
-        allReviews = allReviews.concat(reviews);
-        totalReviewsCount += reviews.length;
-      } else {
-        console.log(`No reviews found on page ${currentPage}. Stopping pagination.`);
-        break; // Stop if no reviews are found
+      reviews = reviews.concat(reviewsOnPage);
+      
+      if (i < maxPages) {
+        // Move to the next page (adjust based on actual pagination button structure)
+        const nextPageButton = await pageInstance.$('.next-page');
+        if (nextPageButton) {
+          await nextPageButton.click();
+          await pageInstance.waitForSelector('.review', { visible: true });
+        }
       }
     }
 
-    await browser.close(); // Close the browser once done
+    await browser.close();
 
-    return {
-      reviews_count: totalReviewsCount,
-      reviews: allReviews,
-    };
-  } catch (error) {
-    console.error("Error extracting reviews with Puppeteer:", error.message);
-    return {
-      reviews_count: 0,
-      reviews: [],
-      error: "Failed to extract reviews using Puppeteer.",
-    };
+    return { reviews, error };
+  } catch (err) {
+    error = `Error during Puppeteer scraping: ${err.message}`;
+    console.error(error);
+    return { reviews: [], error };
   }
 };
-
-export { extractReviewsWithPuppeteer };
 
