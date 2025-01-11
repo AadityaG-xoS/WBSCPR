@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the **WBSCPR:Reviews Scraper**! This project utilizes **ScrapeGraph.ai**, **Node.js**, and **Render** to build a robust review scraping website that fetches product reviews from various e-commerce websites and displays them on a user-friendly interface. The project is designed to help businesses, researchers, or developers access aggregated reviews for analysis, insights, or feedback purposes.
+Welcome to the **WBSCPR: Reviews Scraper**! This project utilizes **ScrapeGraph.ai**, **Node.js**, and **Render** to build a robust review scraping website that fetches product reviews from various e-commerce websites and displays them on a user-friendly interface. The project is designed to help businesses, researchers, or developers access aggregated reviews for analysis, insights, or feedback purposes.
 
 The app leverages **ScrapeGraph.ai** for scraping data, **Node.js** for backend development, and **Render** for cloud deployment, offering a seamless experience with scalability, reliability, and ease of access.
 
@@ -26,10 +26,6 @@ The app leverages **ScrapeGraph.ai** for scraping data, **Node.js** for backend 
 ### 4. **API for Easy Integration**
    - Built-in API to fetch reviews, making it easy to integrate with other applications or tools.
    - Data can be used in analysis, reporting, or visualizations.
-
-### 5. **Extensible and Scalable**
-   - Easily extendable architecture to add more scraping sources, endpoints, or functionalities.
-   - Can be scaled as needed without major refactors.
 
 ---
 
@@ -80,6 +76,7 @@ Here are some sample outputs from the Review Scraper API:
 
 JSON Reviews Response:
 ![1](assets/jsn1.png)
+<<<<<<< HEAD
 ![1](assets/jsn2.png)
 
 Deployment using Render:
@@ -88,6 +85,19 @@ Deployment using Render:
 A visualization of the scraped reviews, showing user ratings and feedback:
 ![1](assets/ot1.png)
 ![1](assets/ot2.png)
+=======
+![2](assets/jsn1.png)
+
+
+Deployment using Render:
+![1](assets/rndr.png)
+
+
+A visualization of the scraped reviews, showing user ratings and feedback:
+![1](assets/ot1.png)
+![2](assets/ot2.png)
+
+>>>>>>> ab88f08ca4b454048036a54b8c9e817d42cf6cc5
 
 ###  Conclusion
 
