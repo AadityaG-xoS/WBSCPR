@@ -71,3 +71,4 @@ const extractReviews = async (baseUrl, paginationQuery = "?page=", maxPages = 5)
 };
 
 export { extractReviews };
+

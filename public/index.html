@@ -100,6 +100,7 @@
     <script>
       let currentPage = 1;
       let maxPages = 5;
+      let totalPages = 1;
 
       async function fetchReviews(page) {
         const urlInput = document.getElementById("url-input").value;
@@ -143,16 +144,18 @@
 
           loadingMessage.innerHTML = ""; // Clear loading message
 
-          // Render reviews
+          // Handle if no reviews
           if (data.reviews_count === 0) {
             reviewsContainer.innerHTML = "<p>No reviews available.</p>";
             paginationControls.style.display = "none";
             return;
           }
 
+          totalPages = Math.ceil(data.reviews_count / maxPages); // Calculate total pages
           paginationControls.style.display = "block";
           document.getElementById("current-page").innerText = `Page: ${currentPage}`;
 
+          // Render reviews
           data.reviews.forEach((review) => {
             const reviewElement = document.createElement("div");
             reviewElement.classList.add("review");
@@ -168,6 +171,11 @@
 
             reviewsContainer.appendChild(reviewElement);
           });
+
+          // Handle pagination buttons visibility
+          document.querySelector(".pagination-controls button:nth-child(1)").disabled = currentPage <= 1; // Disable "Previous" if on first page
+          document.querySelector(".pagination-controls button:nth-child(3)").disabled = currentPage >= totalPages; // Disable "Next" if on last page
+
         } catch (error) {
           console.error("Error fetching reviews:", error);
           errorMessage.innerHTML =
@@ -177,7 +185,9 @@
       }
 
       function nextPage() {
-        fetchReviews(currentPage + 1);
+        if (currentPage < totalPages) {
+          fetchReviews(currentPage + 1);
+        }
       }
 
       function prevPage() {
